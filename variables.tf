@@ -5,7 +5,7 @@ variable "application_name" {
 
 variable "authorized_accounts" {
   type        = list(string)
-  description = "A list of AWS Account IAM items that can access the secrets"
+  description = "A list of IAM roles/users that can access this resource"
 }
 
 variable "domain" {
