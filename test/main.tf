@@ -1,13 +1,12 @@
-provider "aws" {}
+variable "region" {
+  default = "eu-central-1"
+}
+
+provider "aws" {
+  region = var.region
+}
 
 provider "auth0" {}
-
-module "test" {
-  source              = "../"
-  application_name    = "auth0-terraform-module-test"
-  audience            = auth0_resource_server.server.identifier
-  authorized_accounts = [0]
-}
 
 resource "auth0_resource_server" "server" {
   name        = "auth0-terraform-module-resource-server"
@@ -16,4 +15,12 @@ resource "auth0_resource_server" "server" {
 
 }
 
+module "test" {
+  source              = "../"
+  application_name    = "auth0-terraform-module-test"
+  audience            = auth0_resource_server.server.identifier
+  authorized_accounts = [0]
+  region              = var.region
+  domain              = "tetete"
+}
 
