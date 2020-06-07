@@ -19,8 +19,9 @@ module "test" {
   source              = "../"
   application_name    = "auth0-terraform-module-test"
   audience            = auth0_resource_server.server.identifier
-  authorized_accounts = [0]
+  authorized_accounts = [765948204630]
   region              = var.region
   domain              = "tetete"
+  deletion_window     = 0
 }
 

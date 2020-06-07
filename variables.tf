@@ -4,8 +4,8 @@ variable "application_name" {
 }
 
 variable "authorized_accounts" {
-  type        = list(number)
-  description = "A list of AWS Account ID's that can access the secrets"
+  type        = list(string)
+  description = "A list of AWS Account IAM items that can access the secrets"
 }
 
 variable "domain" {
@@ -47,4 +47,13 @@ variable "tags" {
   default     = {}
   type        = map (string)
   description = "Tags for the AWS resources"
+}
+
+variable "deletion_window" {
+  default     = 7
+  description = "Deletion window in which the secret can be recovered"
+}
+
+locals {
+  root_account = "arn:aws:iam::${data.aws_caller_identity.identity.account_id}:root"
 }
